@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: 45, 27, 105;
+  --color-secondary: 18, 11, 41;
+  --color-accent: 255, 0, 255;
+  --color-text: 224, 224, 255;
+  --color-background: 10, 7, 23;
+}
+
+body {
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-text));
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.font-creepster {
+  font-family: 'Creepster', cursive;
+}
+
+/* Custom animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-5px, 5px); }
+  40% { transform: translate(-5px, -5px); }
+  60% { transform: translate(5px, 5px); }
+  80% { transform: translate(5px, -5px); }
+  100% { transform: translate(0); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.animate-glitch {
+  animation: glitch 0.5s linear infinite;
+  animation-play-state: paused;
+}
+
+.glitch-trigger:hover .animate-glitch {
+  animation-play-state: running;
+}
+
+/* Data stream effect */
+.data-stream {
+  position: absolute;
+  color: rgba(0, 255, 255, 0.5);
+  font-family: monospace;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(var(--color-secondary), 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--color-accent), 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--color-accent), 0.8);
+}
