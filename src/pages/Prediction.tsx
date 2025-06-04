@@ -4,6 +4,7 @@ import { Card } from '../components/ui/Card';
 import { Input } from '../components/ui/Input';
 import { Select } from '../components/ui/Select';
 import { Button } from '../components/ui/Button';
+import { generateDeathPrediction } from '../utils/claude-api';
 import { calculateDeathPrediction } from '../utils/predictions';
 
 interface PredictionProps {
@@ -97,11 +98,16 @@ export const Prediction: React.FC<PredictionProps> = ({ onComplete }) => {
     if (validateStep()) {
       setIsSubmitting(true);
       
-      // Simulate API call to generate prediction
-      setTimeout(() => {
-        const prediction = calculateDeathPrediction(formData);
+      try {
+        // Call the Claude API for a prediction
+        const prediction = await generateDeathPrediction(formData);
         onComplete(prediction);
-      }, 3000);
+      } catch (error) {
+        console.error('Error getting prediction:', error);
+        // Fallback to local prediction if API fails
+        const fallbackPrediction = calculateDeathPrediction(formData);
+        onComplete(fallbackPrediction);
+      }
     }
   };
   
